@@ -10,7 +10,9 @@ const morgan = require('koa-morgan');
 const moment = require('moment');
 const rfs = require('rotating-file-stream');
 const views = require('koa-views');
+const Router = require('koa-router');
 const app = new Koa();
+const router = new Router();
 
 
 /*
@@ -19,12 +21,31 @@ const app = new Koa();
  * Must be used before any router is used
  * ========================================
  */
-// app.use(views(__dirname + '/views', {
-//     map: {
-//         html: 'underscore'
-//     }
-// }));
-app.use(views(path.join(__dirname, '/views'), { extension: 'html' }));
+app.use(views(path.join(__dirname, '/views'), {extension: 'html'}));
+
+
+/*
+ * ========================================
+ * 引入外部route文件
+ * ========================================
+ */
+const index = require('./routes/index');
+
+/*
+ * ========================================
+ * router.use 外部文件
+ * ========================================
+ */
+router.use('/', index.routes(), index.allowedMethods());
+
+/*
+ * ========================================
+ * 初始化router
+ * ========================================
+ */
+app.use(router.routes()).use(router.allowedMethods());
+
+
 /*
  * ========================================
  * 日志目录 -- 访问日志
@@ -74,9 +95,11 @@ app.use(morgan(function (tokens, req, res) {
  * 输出错误日志，前台显示异常页面
  * ========================================
  */
-// look ma, error propagation!
-app.use(async function (ctx, next) {
+app.use(async (ctx, next) => {
+
     try {
+        console.log("try ===== router");
+        console.log(ctx);
         await next();
     } catch (err) {
         // some errors will have .status
@@ -92,21 +115,36 @@ app.use(async function (ctx, next) {
         ctx.app.emit('error', err, ctx);
     }
 });
-app.use(async ctx=> {
-    await ctx.render('index');
-});
+
+//渲染首页
+// router.get('/index', async ctx => {
+//     console.log("index ===== router");
+//     console.log(ctx.render);
+//     // await ctx.render('index', {
+//     //     user: 'index'
+//     // });
+// });
+
+/*
+ * ==========================================
+ * 捕获error
+ * ==========================================
+ */
 app.on('error', (err, ctx) => {
+    console.log("get error", err);
     if (process.env.NODE_ENV != 'test') {
         console.log('sent error %s to the cloud', err.message);
         console.log(err);
     }
 });
 
-// 拦截404
+/*
+ * ==========================================
+ * 拦截404 根据访问的是html,还是接口返回不同的内容
+ * ==========================================
+ */
 app.use(async ctx => {
-    // ctx.status = 404;
-
-    console.log(ctx.status);
+    ctx.status = 404;
     switch (ctx.accepts('html', 'json')) {
         case 'html':
             ctx.type = 'html';
@@ -130,6 +168,7 @@ app.use(async ctx => {
     // console.log(`${ctx.ip}-${ctx.cookies.get("name")}`);
     // ctx.body = ctx.response.status;
 });
+
 
 //listen
 http.createServer(app.callback()).listen(3000);
