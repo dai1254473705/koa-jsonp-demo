@@ -107,7 +107,6 @@ app.use(async (ctx, next) => {
         ctx.status = err.status || 500;
         ctx.type = 'html';
         ctx.body = '<p>Something <em>exploded</em>, please contact Maru.</p>';
-
         // since we handled this manually we'll
         // want to delegate to the regular app
         // level error handling as well so that
@@ -115,15 +114,6 @@ app.use(async (ctx, next) => {
         ctx.app.emit('error', err, ctx);
     }
 });
-
-//渲染首页
-// router.get('/index', async ctx => {
-//     console.log("index ===== router");
-//     console.log(ctx.render);
-//     // await ctx.render('index', {
-//     //     user: 'index'
-//     // });
-// });
 
 /*
  * ==========================================
