@@ -11,8 +11,6 @@ const app = new Koa();
 const router = new Router();
 
 router.get('index', async function (ctx, next) {
-    // ctx.body = 'this a index response!';
-    console.log("首页router ===>",ctx);
 
     await ctx.render('index', {
         layout:"xx.hbs"
@@ -24,4 +22,5 @@ router.get('user', async function (ctx, next) {
 
     ctx.body = {"retcode":"success","name":"zhaojing"};
 });
+
 module.exports = router;
