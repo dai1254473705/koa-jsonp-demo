@@ -24,17 +24,16 @@ fsDirectorSync(logDirectoryInfo);
 fsDirectorSync(logDirectoryError);
 
 const logger = new (winston.Logger)({
-    // level: level,
     transports: [
         new (winston.transports.Console)({
-            level: 'log',
+            level: 'debug',
             json: false
         }),
         new (winston.transports.DailyRotateFile)({
-            name: 'info-file',
-            filename: logDirectoryInfo,
-            datePattern: '_yyyyMMdd_access.log',
-            prepend: false,
+            name:"info-log",
+            filename: `${logDirectoryInfo}/%DATE%-access.log`,
+            datePattern: 'YYYYMMDD',
+            zippedArchive: true,
             localTime: true,
             level: 'info',
             zippedArchive: true,
@@ -42,10 +41,10 @@ const logger = new (winston.Logger)({
             maxFiles: '30d'
         }),
         new (winston.transports.DailyRotateFile)({
-            name: 'error-file',
-            filename: logDirectoryError,
-            datePattern: '_yyyyMMdd_access.log',
-            prepend: false,
+            name:"error-log",
+            filename:`${logDirectoryError}/%DATE%-access.log`,
+            datePattern: 'YYYYMMDD',
+            zippedArchive: true,
             localTime: true,
             level: 'error',
             zippedArchive: true,

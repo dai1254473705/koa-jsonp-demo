@@ -56,3 +56,6 @@ buck-out/
 # logs
 logs/
 .logs
+
+# hbuilder
+.project

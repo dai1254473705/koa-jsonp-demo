@@ -14,9 +14,8 @@ const router = new Router();
 const fs = require('fs');
 const path = require('path');
 const logger = require("./middlewares/localLogger");
-
 //http 请求日志
-// require("./middlewares/httpLogger")();
+require("./middlewares/httpLogger")(app);
 /*
  * ========================================
  * 页面模板渲染设置
@@ -25,8 +24,6 @@ const logger = require("./middlewares/localLogger");
  */
 app.use(views(path.join(__dirname, '/views'), {extension: 'html'}));
 
-logger.log("-----------process.env.NODE_ENV--------");
-// logger.info(process.env.NODE_ENV);
 /*
  * ========================================
  * 引入外部route文件
