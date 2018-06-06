@@ -10,7 +10,9 @@
 > + [koa-router](https://github.com/alexmingoia/koa-router)【描述】Router middleware for koa.
 
 > + [koa-views](https://github.com/queckezz/koa-views)【描述】渲染模板文件（ejs,html）
-koa-static
+koa-static 弃用使用koa-ejs
+
+> + [koa-ejs](https://github.com/koajs/ejs)【描述】a koa view render middleware, support all feature of ejs
 
 > + [winston](https://www.npmjs.com/package/winston) 【描述】日志
 

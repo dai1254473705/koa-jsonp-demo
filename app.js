@@ -7,7 +7,7 @@
 const http = require('http');
 const Koa = require('koa');
 const morgan = require('koa-morgan');
-const views = require('koa-views');
+const render = require('koa-ejs');
 const Router = require('koa-router');
 const app = new Koa();
 const router = new Router();
@@ -22,8 +22,13 @@ require("./middlewares/httpLogger")(app);
  * Must be used before any router is used
  * ========================================
  */
-app.use(views(path.join(__dirname, '/views'), {extension: 'html'}));
-
+render(app, {
+    root: path.join(__dirname, 'views'),
+    layout: false,
+    viewExt: 'html',
+    cache: false,
+    debug: true
+});
 /*
  * ========================================
  * 引入外部route文件
