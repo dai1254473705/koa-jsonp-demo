@@ -14,21 +14,11 @@ const router = new Router();
 const fs = require('fs');
 const path = require('path');
 const logger = require("./middlewares/localLogger");
+const serve = require('koa-static');
+app.use(serve(__dirname+ "/dist",{ extensions: ['html']}));
 //http 请求日志
 require("./middlewares/httpLogger")(app);
-/*
- * ========================================
- * 页面模板渲染设置
- * Must be used before any router is used
- * ========================================
- */
-render(app, {
-    root: path.join(__dirname, 'views'),
-    layout: false,
-    viewExt: 'html',
-    cache: false,
-    debug: true
-});
+
 /*
  * ========================================
  * 引入外部route文件
