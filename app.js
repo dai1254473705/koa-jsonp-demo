@@ -115,5 +115,5 @@ app.use(async ctx => {
 
 
 //listen
-http.createServer(app.callback()).listen(process.env.NODE_PORT||3000);
-console.log(`sever is running at:http://127.0.0.1:${process.env.NODE_PORT||3000}`);
+http.createServer(app.callback()).listen(process.env.NODE_PORT||3010);
+console.log(`sever is running at:http://127.0.0.1:${process.env.NODE_PORT||3010}`);
