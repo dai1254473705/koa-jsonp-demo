@@ -7,6 +7,7 @@
 const http = require('http');
 const Koa = require('koa');
 const morgan = require('koa-morgan');
+const koaBody = require('koa-body');
 const render = require('koa-ejs');
 const Router = require('koa-router');
 const app = new Koa();
@@ -15,7 +16,10 @@ const fs = require('fs');
 const path = require('path');
 const logger = require("./middlewares/localLogger");
 const serve = require('koa-static');
+const favicon = require('koa-favicon');
+app.use(koaBody()); // ctx.request.body
 app.use(serve(__dirname+ "/dist",{ extensions: ['html']}));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 //http 请求日志
 require("./middlewares/httpLogger")(app);
 

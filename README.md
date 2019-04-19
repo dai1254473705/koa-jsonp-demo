@@ -17,3 +17,19 @@ koa-static 弃用使用koa-ejs
 > + [winston](https://www.npmjs.com/package/winston) 【描述】日志
 
 > + [winston-daily-rotate-file](https://www.npmjs.com/package/winston-daily-rotate-file) 【描述】winston按照时间每天输出
++ koa-body: https://github.com/dlau/koa-body
++ koa-favicon:https://github.com/koajs/favicon
++ koa-compress:https://github.com/koajs/compress
++ csrf: https://github.com/koajs/csrf
++ koa-onerror:https://github.com/koajs/onerror
++ A parameter verify tools.: https://github.com/node-modules/parameter
++ lodash: https://www.lodashjs.com/docs/4.17.5.html
++ request: 
++ fs-extra: https://www.npmjs.com/package/fs-extra
++ node-notifier: https://www.npmjs.com/package/node-notifier
+// 自己写
+
++ https://github.com/koajs/response-time
+
+<!-- https://www.jianshu.com/p/548a19e1086c -->
+// 控制台诸葛找房
