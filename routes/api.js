@@ -7,7 +7,7 @@ const Router = require("koa-router");
 const router = new Router();
 
 /**
- * 获取数据
+ * get方法获取数据
  */
 router.get("/userget", async function (ctx, next) {
     const data = {
@@ -27,7 +27,7 @@ router.get("/userget", async function (ctx, next) {
 });
 
 /**
- * 获取数据
+ * post方法获取数据
  */
 router.post("/userpost", async function (ctx, next) {
     const data = {
@@ -48,7 +48,7 @@ router.post("/userpost", async function (ctx, next) {
 });
 
 /**
- * 获取数据
+ * jsonp方法获取数据
  */
 router.get("/userjsonp", async function (ctx, next) {
     const data = {

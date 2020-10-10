@@ -9,11 +9,14 @@ button{
   padding: 10px 20px;
   border: 0;
   font-size: 14px;
-  background: #f80;
+  background: #eee;
   color: #fff;
   outline: none;
   margin-right: 20px;
   cursor: pointer;
+}
+button.active{
+  background: #f80;
 }
 button:hover{
   opacity: 0.5;
